@@ -28,7 +28,7 @@
             <li><%= link_to "Sign In", signin_path %></li>
             <li><%= link_to "Sign Up", new_user_path %></li>
             <li><%= link_to "See attractions", attractions_path %></li>
-        
+
 
           </ul>
         </div><!--/.nav-collapse -->
@@ -37,6 +37,9 @@
 
     <!-- content -->
     <div class="container"  role="main">
+      <%= content_tag(:div, flash[:error], :id => "error") if flash[:error] %>
+      <%= content_tag(:div, flash[:notice], :id => "notice") if flash[:notice] %>
+      <%= content_tag(:div, flash[:alert], :id => "alert") if flash[:alert] %>
       <%= yield %>
     </div>
 

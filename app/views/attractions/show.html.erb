@@ -1,8 +1,13 @@
+<p id="notice"><%= notice %></p>
 <% if @message %>
-<h4><%= @message %></h4>
+<p><%= @message %></p>
 <% end %>
-
-
+<p><strong>Name:</strong> <%= @attraction.name %></p>
+<p><strong>Total Number of Users:</strong> <%= @attraction.users.count %></p>
+<p><strong>Ticket Requirement:</strong> <%= @attraction.tickets %></p>
+<p><strong>Height Requirement:</strong> <%= @attraction.min_height %> inches</p>
+<p><strong>Nausea Rating:</strong> <%= @attraction.nausea_rating %></p>
+<p><strong>Happiness Rating:</strong> <%= @attraction.happiness_rating %></p>
 <%= @attraction.name %>
 <% if !is_admin? %>
 <form action="/rides/new" method="post">

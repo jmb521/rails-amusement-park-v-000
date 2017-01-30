@@ -18,23 +18,25 @@ class Ride < ActiveRecord::Base
 
 
   def enough_tickets
-    if self.user.tickets.to_i >= attraction.tickets.to_i
-      tickets
+    if attraction.tickets <= self.user.tickets
+      return tickets
 
     end
-    return tickets
+
   end
 
   def right_height
-    if self.user.height.to_i >= attraction.min_height.to_i
-      height
+    if  attraction.min_height <= self.user.height
+      return height
 
     end
+
   end
 
 
   def tickets
-    "You do not have enough tickets the #{attraction.name}."
+    "You do not have enough tickets to ride the #{attraction.name}."
+    
   end
   def height
     "You are not tall enough to ride the #{attraction.name}."
@@ -44,13 +46,13 @@ class Ride < ActiveRecord::Base
     updated_tickets = self.user.tickets.to_i - attraction.tickets.to_i
     updated_nausea = self.user.nausea.to_i + attraction.nausea_rating.to_i
     updated_happiness = self.user.happiness.to_i + attraction.happiness_rating.to_i
-    
+
     self.user.update(
       tickets:updated_tickets,
       nausea:updated_nausea,
       happiness: updated_happiness
     )
 
-      "Thank you for riding the #{attraction.name}!"
+    "Thanks for riding the #{attraction.name}!"
   end
 end

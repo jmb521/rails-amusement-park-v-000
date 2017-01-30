@@ -1,8 +1,8 @@
 <%= @user.name %>
 <% if is_admin? %>
 ADMIN
-<%= link_to 'Edit', edit_user_path(@user) %>
 <% end %>
+<%= link_to 'Edit', edit_user_path(@user) %>
 Mood: <%= @user.mood %>
 Tickets: <%= @user.tickets %>
 Height: <%= @user.height %>

@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   resources :users
   resources :attractions
   post '/rides/new', to: "rides#new"
+
 end
