@@ -1,10 +1,9 @@
 class UsersController < ApplicationController
   before_action :authenticate_user, only:[:show]
-  
+
   def new
     @user = User.new
   end
-
 
   def create
     @user = User.new(user_params)
@@ -19,13 +18,24 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
-    if !current_user.admin
-      if current_user != @user
+    if current_user != @user
+      if !current_user.admin
         redirect_to root_path
       end
     end
-  end
 
+    @message = params[:message] if params[:message]
+    @message ||= false
+
+  end
+  def edit
+    @user = User.find(params[:id])
+  end
+  def update
+    @user = User.find(params[:id])
+    @user.update(user_params)
+    @user.save
+  end
 
   private
   def user_params

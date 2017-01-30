@@ -1,11 +1,17 @@
+<% if @message %>
+<h4><%= @message %></h4>
+<% end %>
+
+
 <%= @attraction.name %>
-# <% if is_admin? %>
-#  <p>Admin</p>
-#  <% end %>
+<% if !is_admin? %>
+<form action="/rides/new" method="post">
+       <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+       <%= tag(:input, :type => "hidden", :name => :user_id, :value => current_user.id) %>
+       <%= tag(:input, :type => "hidden", :name => :attraction_id, :value => @attraction.id) %>
+       <input type="submit" value="Go on this ride">
+</form>
+<% else %>
 
-
-
-
-
-
-<button action>
+  <%= link_to 'Edit Attraction', edit_attraction_path(@attraction) %>
+<% end %>
